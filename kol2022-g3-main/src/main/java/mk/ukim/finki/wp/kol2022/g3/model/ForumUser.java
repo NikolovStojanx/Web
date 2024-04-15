@@ -1,8 +1,10 @@
 package mk.ukim.finki.wp.kol2022.g3.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 public class ForumUser {
 
     public ForumUser() {
@@ -16,7 +18,8 @@ public class ForumUser {
         this.interests = interests;
         this.birthday = birthday;
     }
-
+    @Id
+    @GeneratedValue
     private Long id;
 
     private LocalDate birthday;
@@ -27,8 +30,10 @@ public class ForumUser {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private ForumUserType type;
 
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Interest> interests;
 
     public Long getId() {
