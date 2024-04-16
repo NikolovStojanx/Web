@@ -51,8 +51,9 @@ public class MenuController {
         return "form";
     }
 
-    @GetMapping("menus/{id}/edit")
-    public String showEdit(@PathVariable Long id, Model model) {
+    @GetMapping("menu/{id}/edit")
+    public String showEdit(@PathVariable Long id,
+                           Model model) {
         Menu menu = this.menuService.findById(id);
         model.addAttribute("menu", menu);
         model.addAttribute("items", menuItemService.listAll());

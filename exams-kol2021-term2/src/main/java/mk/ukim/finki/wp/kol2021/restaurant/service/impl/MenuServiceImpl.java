@@ -7,7 +7,6 @@ import mk.ukim.finki.wp.kol2021.restaurant.repository.MenuRepository;
 import mk.ukim.finki.wp.kol2021.restaurant.service.MenuItemService;
 import mk.ukim.finki.wp.kol2021.restaurant.service.MenuService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +60,8 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> listMenuItemsByRestaurantNameAndMenuType(String restaurantName, MenuType menuType) {
+        if (restaurantName.equals(""))
+            restaurantName = null;
 
         List<Menu> menus;
 

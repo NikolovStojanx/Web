@@ -6,12 +6,13 @@
 <body>
 <!-- The form should submit to MenuController.create or  MenuController.update, depending on whether we are
 creating or editing a menu -->
-<form>
+<form method="POST" th:action="@{'/menu/{id}' (id=${menu?.id})}">
     <div>
         <label for="name">Restaurant Name</label>
         <input type="text"
                id="name"
                name="name"
+               th:value="${menu?.restaurantName}"
                required>
     </div>
 
@@ -20,18 +21,20 @@ creating or editing a menu -->
         <select id="menuType" name="menuType">
             <!-- For each category you should have one <option> like below  -->
             <option
-                th:each="cat: ${types}"> [cat.name]</option>
+                th:each="cat: ${types}" th:text="${cat.name()}" th:value="${cat}"> [cat.name]</option>
         </select>
     </div>
 
     <div>
         <label>Menu Items</label><br/>
-        <select id="menuItems" name="menuItems" multiple="multiple" size="5">
+        <select id="menuItems" name="menuItemIds" multiple="multiple" size="5">
             <!-- For each category you should have one <option> like below  -->
-            <option value="[menuItem.ID]"> [menuItem.name]</option>
+            <option th:each="item: ${items}"
+                    th:value="${item.id}"
+                    th:text="${item.name}"
+                    th:selected="${menu?.menuItems?.contains(item)}"> [menuItem.name]</option>
         </select>
     </div>
-
     <button id="submit" type="submit">Submit</button>
     <a id="back" href="/menu" type="button" class="btn btn-primary">Back to menus</a>
 </form>
